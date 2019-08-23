@@ -49,12 +49,9 @@ app.prepare().then(() => {
     ctx.res.statusCode = 200;
   });
 
-  router.post("*", verifyRequest(), async ctx => {
+  router.post('/mypos/promotions', (ctx) => {
     console.log(ctx.req.body);
-    await handle(ctx.req, ctx.res);
-    //ctx.respond = false;
-
-    ctx.res.body = {
+    ctx.body = {
       type: "simple_action_list",
       points_label: "ポイント残高",
       points_balance: 23867,
@@ -75,10 +72,9 @@ app.prepare().then(() => {
         }
       ]
     };
-    ctx.res.type = "application/json";
-    
-    ctx.res.statusCode = 200;
-  });
+    ctx.type = "application/json";
+    ctx.status = 200;
+  });  
 
   server.use(router.allowedMethods());
   server.use(router.routes());
