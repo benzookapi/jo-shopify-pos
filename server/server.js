@@ -50,8 +50,10 @@ app.prepare().then(() => {
   });
 
   router.post("*", verifyRequest(), async ctx => {
+    console.log(ctx.req.body);
     await handle(ctx.req, ctx.res);
-    ctx.respond = false;
+    //ctx.respond = false;
+    
     ctx.res.statusCode = 200;
   });
 
