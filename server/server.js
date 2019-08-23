@@ -49,6 +49,12 @@ app.prepare().then(() => {
     ctx.res.statusCode = 200;
   });
 
+  router.post("*", verifyRequest(), async ctx => {
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+    ctx.res.statusCode = 200;
+  });
+
   server.use(router.allowedMethods());
   server.use(router.routes());
 
