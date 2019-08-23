@@ -53,6 +53,29 @@ app.prepare().then(() => {
     console.log(ctx.req.body);
     await handle(ctx.req, ctx.res);
     //ctx.respond = false;
+
+    ctx.res.body = {
+      type: "simple_action_list",
+      points_label: "ポイント残高",
+      points_balance: 23867,
+      actions: [
+        {
+          type: "flat_discount",
+          title: "5.00ドルのディスカウントを追加する",
+          description: "-1000ポイント",
+          action_id: "123ABC",
+          value: "5"
+        },
+        {
+          type: "percent_discount",
+          title: "20%のディスカウント",
+          description: "-1000ポイント",
+          action_id: "456DEF",
+          value: "0.2"
+        }
+      ]
+    };
+    ctx.res.type = "application/json";
     
     ctx.res.statusCode = 200;
   });
