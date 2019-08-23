@@ -6,7 +6,7 @@
     "test": "jest",
     "dev": "NODE_ENV=development nodemon ./server/index.js --watch ./server/index.js",
     "build": "next build",
-    "start": "NODE_ENV=development nodemon ./server/index.js --watch ./server/index.js",
+    "start": "NODE_ENV=development node ./server/index.js",
     "generate-page": "node scripts/index.js generate-page",
     "generate-recurring-billing": "node scripts/index.js generate-recurring-billing",
     "generate-one-time-billing": "node scripts/index.js generate-one-time-billing",
