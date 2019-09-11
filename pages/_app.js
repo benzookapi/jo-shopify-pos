@@ -33,6 +33,26 @@ class MyApp extends App {
       </Container>
     );
   }
+
+  showApp = () => {
+    var iframe = document.createElement('iframe');
+var start = new Date().getTime();
+iframe.style.border = 'none';
+iframe.style.width = '1px';
+iframe.style.height = '1px';
+
+iframe.src = 'twitter://post?message=' + encodeURIComponent('ほげほげ #ふがふが');
+document.body.appendChild(iframe);
+
+setTimeout(function() {
+  var diff = new Date().getTime() - start;
+
+  if (diff < 510) {
+    window.location.href = 'http://itunes.com/apps/twitter';
+    iframe.parentNode.removeChild(iframe);
+  }
+}, 500);
+  };
 }
 
 export default MyApp;
