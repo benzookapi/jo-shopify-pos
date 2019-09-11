@@ -6,6 +6,8 @@ import { Provider } from "@shopify/app-bridge-react";
 import Cookies from "js-cookie";
 import "@shopify/polaris/styles.css";
 
+import {Redirect} from '@shopify/app-bridge/actions';
+
 const client = new ApolloClient({
   fetchOptions: {
     credentials: "include"
@@ -15,6 +17,9 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     const shopOrigin = Cookies.get("shopOrigin");
+
+    const redirect = Redirect.create(this);
+
     return (
       <Container>
         <AppProvider>
@@ -32,27 +37,14 @@ class MyApp extends App {
         </AppProvider>
       </Container>
     );
-  }
 
-  showApp = () => {
-    var iframe = document.createElement('iframe');
-var start = new Date().getTime();
-iframe.style.border = 'none';
-iframe.style.width = '1px';
-iframe.style.height = '1px';
-
-iframe.src = 'twitter://post?message=' + encodeURIComponent('ほげほげ #ふがふが');
-document.body.appendChild(iframe);
-
-setTimeout(function() {
-  var diff = new Date().getTime() - start;
-
-  if (diff < 510) {
-    window.location.href = 'http://itunes.com/apps/twitter';
-    iframe.parentNode.removeChild(iframe);
-  }
-}, 500);
-  };
+    openApp = () => {
+      this.redirect.dispatch(Redirect.Action.REMOTE, 'sms://');
+    };
+  } 
+  
 }
+
+
 
 export default MyApp;
