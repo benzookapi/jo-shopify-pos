@@ -16,8 +16,6 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     const shopOrigin = Cookies.get("shopOrigin");
 
-    const redirect = Redirect.create(this);
-
     return (
       <Container>
         <AppProvider>
