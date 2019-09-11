@@ -6,8 +6,6 @@ import { Provider } from "@shopify/app-bridge-react";
 import Cookies from "js-cookie";
 import "@shopify/polaris/styles.css";
 
-import {Redirect} from '@shopify/app-bridge/actions';
-
 const client = new ApolloClient({
   fetchOptions: {
     credentials: "include"
@@ -37,10 +35,6 @@ class MyApp extends App {
         </AppProvider>
       </Container>
     );
-
-    openApp = () => {
-      this.redirect.dispatch(Redirect.Action.REMOTE, 'sms://');
-    };
   } 
   
 }
