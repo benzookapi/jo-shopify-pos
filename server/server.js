@@ -52,7 +52,7 @@ app.prepare().then(() => {
   });
 
   router.get('/cart', (ctx, next) => {
-    console.log("****pos_cart******");
+    console.log("****cart******");
     console.log(ctx.request.body);
     /* Check the signature */
     /*if (!checkSignature(ctx.request.body)) {
@@ -64,6 +64,21 @@ app.prepare().then(() => {
     //ctx.status = 200;
     ctx.set('Content-Type', 'text/html');  
     ctx.body = fs.createReadStream('./html/cart.html');
+  });
+
+  router.get('/complete', (ctx, next) => {
+    console.log("****complete******");
+    console.log(ctx.request.body);
+    /* Check the signature */
+    /*if (!checkSignature(ctx.request.body)) {
+      ctx.status = 400;
+      return;
+    }*/
+    //ctx.set('Content-Type', 'text/html');
+    //ctx.body = `<p>CART!!</p>`;
+    //ctx.status = 200;
+    ctx.set('Content-Type', 'text/html');  
+    ctx.body = fs.createReadStream('./html/complete.html');
   });
 
   router.get("cart", async ctx => {
