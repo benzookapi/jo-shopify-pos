@@ -9,6 +9,8 @@ import Router from "koa-router";
 import session from "koa-session";
 import * as handlers from "./handlers/index";
 
+const fs = require('fs');
+
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
 const dev = process.env.NODE_ENV !== "production";
@@ -43,7 +45,34 @@ app.prepare().then(() => {
 
   server.use(graphQLProxy({ version: ApiVersion.July19 }));
 
-  router.get("*", verifyRequest(), async ctx => {
+  router.get("/", verifyRequest(), async ctx => {
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+    ctx.res.statusCode = 200;
+  });
+
+  router.get('/cart', (ctx, next) => {
+    console.log("****pos_cart******");
+    console.log(ctx.request.body);
+    /* Check the signature */
+    /*if (!checkSignature(ctx.request.body)) {
+      ctx.status = 400;
+      return;
+    }*/
+    //ctx.set('Content-Type', 'text/html');
+    //ctx.body = `<p>CART!!</p>`;
+    //ctx.status = 200;
+    ctx.set('Content-Type', 'text/html');  
+    ctx.body = fs.createReadStream('./html/cart.html');
+  });
+
+  router.get("cart", async ctx => {
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+    ctx.res.statusCode = 200;
+  });
+
+  router.get("*", async ctx => {
     await handle(ctx.req, ctx.res);
     ctx.respond = false;
     ctx.res.statusCode = 200;
